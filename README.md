@@ -1,49 +1,49 @@
-# Projet Atlas – GenAI
+# Atlas Project – GenAI
 
-Ce repository contient un projet web complet, composé d’un backend (API REST construite sur Fastify & Prisma) et d’un frontend (React + Vite). Il inclut également des workflows GitHub pour l’intégration et le déploiement continus, ainsi qu’une configuration pour Docker. Le but est de proposer un socle fonctionnel pour développer des applications web, avec une séparation claire entre le front et le back, et un outillage complet (tests, scripts d’init, linting, etc.).
+This repository contains a complete web project, composed of a backend (REST API built on Fastify & Prisma) and a frontend (React + Vite). It also includes GitHub workflows for continuous integration and deployment, as well as a configuration for Docker. The goal is to provide a functional foundation for developing web applications, with a clear separation between front and back, and a complete toolset (tests, init scripts, linting, etc.).
 
-## Table des matières
+## Table of contents
 
-1. [Aperçu du projet](#aperçu-du-projet)  
-2. [Arborescence générale](#arborescence-générale)  
-3. [Prérequis](#prérequis)  
-4. [Installation et configuration](#installation-et-configuration)
-   - [Configuration des variables d’environnement](#configuration-des-variables-denvironnement)
-5. [Lancer le projet](#lancer-le-projet)
-   - [Lancer le backend](#lancer-le-backend)
-   - [Lancer le frontend](#lancer-le-frontend)
-   - [Utiliser Docker](#utiliser-docker)
-6. [Scripts utiles](#scripts-utiles)
+1. [Project overview](#project-overview)  
+2. [General directory structure](#general-directory-structure)  
+3. [Prerequisites](#prerequisites)  
+4. [Installation and configuration](#installation-and-configuration)
+   - [Environment variables configuration](#environment-variables-configuration)
+5. [Launch the project](#launch-the-project)
+   - [Launch the backend](#launch-the-backend)
+   - [Launch the frontend](#launch-the-frontend)
+   - [Using Docker](#using-docker)
+6. [Useful scripts](#useful-scripts)
 7. [CI/CD – GitHub Workflows](#cicd--github-workflows)
-8. [Contribuer](#contribuer)
-9. [Licence](#licence)
+8. [Contributing](#contributing)
+9. [License](#license)
 
 ---
 
-## 1. Aperçu du projet
+## 1. Project overview
 
-- **Backend** :  
-  - Basé sur [Fastify](https://www.fastify.io/) et [Prisma](https://www.prisma.io/) (avec PostgreSQL).  
-  - Gère l’authentification JWT, la pagination, la configuration de CORS/Helmet, un système de gestion d’erreurs centralisé et la documentation Swagger intégrée.  
-  - Déploiement possible via Docker et Docker Compose, ou [Serverless](https://www.serverless.com/) (AWS Lambda par exemple).
+- **Backend**:  
+  - Based on [Fastify](https://www.fastify.io/) and [Prisma](https://www.prisma.io/) (with PostgreSQL).  
+  - Handles JWT authentication, pagination, CORS/Helmet configuration, a centralized error management system and integrated Swagger documentation.  
+  - Possible deployment via Docker and Docker Compose, or [Serverless](https://www.serverless.com/) (AWS Lambda for example).
 
-- **Frontend** :  
-  - Développé en [React](https://reactjs.org/) + [Vite](https://vitejs.dev/).  
-  - Inclut un exemple de chat en temps réel, une gestion de la navigation avec React Router, un système de Tchat via WebSocket, ainsi que quelques composants d’interface (Sidebar, Layout Dashboard, etc.).  
-  - Configuré avec ESLint, Prettier, TypeScript, etc.  
-  - Prévu pour être déployé sur un hébergement statique (ou via Serverless Finch / CloudFront-S3).
+- **Frontend**:  
+  - Developed in [React](https://reactjs.org/) + [Vite](https://vitejs.dev/).  
+  - Includes a real-time chat example, navigation management with React Router, a WebSocket Chat system, as well as some interface components (Sidebar, Layout Dashboard, etc.).  
+  - Configured with ESLint, Prettier, TypeScript, etc.  
+  - Designed to be deployed on static hosting (or via Serverless Finch / CloudFront-S3).
 
-- **Workflows GitHub** :  
-  - *ci-frontend.yml* : Exécute la CI du frontend, avec installation, tests, build, etc.  
-  - *cd-frontend-deployment.yml* : Déploiement continu du frontend sur un environnement défini (S3, etc.).
+- **GitHub Workflows**:  
+  - *ci-frontend.yml*: Executes frontend CI, with installation, tests, build, etc.  
+  - *cd-frontend-deployment.yml*: Continuous deployment of the frontend to a defined environment (S3, etc.).
 
 ---
 
-## 2. Arborescence générale
+## 2. General directory structure
 
 ```
 redboarddev-atlas-genai/
-├── README.md                 # (ce fichier)
+├── README.md                 # (this file)
 ├── backend/
 │   ├── Dockerfile
 │   ├── docker-compose.yml
@@ -51,7 +51,7 @@ redboarddev-atlas-genai/
 │   ├── serverless.yml
 │   ├── tsconfig.json
 │   ├── app/
-│   │   ├── app.ts            # Point d’entrée Fastify
+│   │   ├── app.ts            # Fastify entry point
 │   │   ├── env/
 │   │   │   └── .env_example
 │   │   └── src/
@@ -76,7 +76,7 @@ redboarddev-atlas-genai/
 │   ├── vite.config.ts
 │   ├── package.json
 │   ├── public/
-│   │   └── locales/          # Fichiers de traduction (i18n)
+│   │   └── locales/
 │   └── src/
 │       ├── App.tsx
 │       ├── components/
@@ -91,124 +91,124 @@ redboarddev-atlas-genai/
 
 ---
 
-## 3. Prérequis
+## 3. Prerequisites
 
-Pour utiliser ce projet localement ou lancer la CI/CD, vous aurez besoin des éléments suivants :
+To use this project locally or run CI/CD, you will need the following elements:
 
 - **Node.js** ≥ 18.x  
-- **npm** ≥ 8.x (fourni avec Node.js), ou **yarn**  
-- **Docker** ≥ 20.10 (si vous utilisez Docker)  
-- **Docker Compose** ≥ 1.29 (pour le docker-compose.yml du backend)  
-- **Serverless CLI** (optionnel, si vous comptez déployer sur AWS Lambda)  
+- **npm** ≥ 8.x (provided with Node.js), or **yarn**  
+- **Docker** ≥ 20.10 (if you use Docker)  
+- **Docker Compose** ≥ 1.29 (for the backend's docker-compose.yml)  
+- **Serverless CLI** (optional, if you plan to deploy on AWS Lambda)  
   ```bash
   npm install -g serverless
   ```
 
 ---
 
-## 4. Installation et configuration
+## 4. Installation and configuration
 
-1. **Cloner le repository**  
+1. **Clone the repository**  
 
    ```bash
-   git clone https://github.com/votre-nom-utilisateur/redboarddev-atlas-genai.git
+   git clone https://github.com/your-username/redboarddev-atlas-genai.git
    cd redboarddev-atlas-genai
    ```
 
-2. **Installer les dépendances**  
-   - Pour le backend :
+2. **Install dependencies**  
+   - For the backend:
      ```bash
      cd backend
      npm install
      ```
-   - Pour le frontend :
+   - For the frontend:
      ```bash
      cd ../frontend
      npm install
      ```
 
-### Configuration des variables d’environnement
+### Environment variables configuration
 
 - **Backend**  
-  - Dans `backend/app/env/.env_example`, vous trouverez un exemple de configuration des variables nécessaires (API_PORT, POSTGRES_USER, POSTGRES_PASSWORD, etc.).  
-  - Copiez le fichier en `.env` et adaptez-le à votre environnement :
+  - In `backend/app/env/.env_example`, you will find an example of the necessary variables configuration (API_PORT, POSTGRES_USER, POSTGRES_PASSWORD, etc.).  
+  - Copy the file to `.env` and adapt it to your environment:
 
     ```bash
     cp backend/app/env/.env_example backend/app/env/.env
     ```
 
-  - Faites de même pour `prisma/.env_example` si nécessaire (DATABASE_URL, etc.).
+  - Do the same for `prisma/.env_example` if necessary (DATABASE_URL, etc.).
 
 - **Frontend**  
-  - Il peut exister un équivalent `.env` pour définir l’URL de l’API, etc.  
-  - Reportez-vous à `frontend/config/stages-urls.json` ou `editApiUrl.js` si vous souhaitez personnaliser les URLs en fonction de l’environnement.
+  - There may be an equivalent `.env` to define the API URL, etc.  
+  - Refer to `frontend/config/stages-urls.json` or `editApiUrl.js` if you want to customize URLs based on the environment.
 
 ---
 
-## 5. Lancer le projet
+## 5. Launch the project
 
-### Lancer le backend
+### Launch the backend
 
-Vous pouvez lancer le backend soit directement en local (Node.js), soit via Docker.
+You can launch the backend either directly locally (Node.js) or via Docker.
 
-#### En local (Node.js)
+#### Locally (Node.js)
 
-1. Rendez-vous dans le dossier `backend`.
-2. Assurez-vous que votre base de données est accessible (via docker ou un service local).
-3. Exécutez :
+1. Go to the `backend` folder.
+2. Make sure your database is accessible (via docker or a local service).
+3. Execute:
    ```bash
    npm run dev
    ```
-4. L’API est normalement accessible sur [http://localhost:3000](http://localhost:3000) (ou le port configuré dans votre `.env`).
+4. The API is normally accessible at [http://localhost:3000](http://localhost:3000) (or the port configured in your `.env`).
 
-#### Lancer le frontend
+#### Launch the frontend
 
-Dans le dossier `frontend` :
+In the `frontend` folder:
 
-1. Démarrez le serveur de développement :
+1. Start the development server:
    ```bash
    npm run dev
    ```
-2. Accédez ensuite à l’URL fournie dans la console (souvent [http://localhost:5173](http://localhost:5173)).
+2. Then access the URL provided in the console (often [http://localhost:5173](http://localhost:5173)).
 
-### Utiliser Docker
+### Using Docker
 
-Le projet peut aussi être lancé via Docker Compose pour le backend. Les scripts se trouvent dans `backend/usefull-scripts`.
+The project can also be launched via Docker Compose for the backend. The scripts are located in `backend/usefull-scripts`.
 
-1. **Démarrer les conteneurs** (backend + DB) :
+1. **Start containers** (backend + DB):
    ```bash
    cd backend
    ./usefull-scripts/start-docker.sh
    ```
-2. **Initialiser la base de données** (migrations, seed) :
+2. **Initialize the database** (migrations, seed):
    ```bash
    ./usefull-scripts/init-docker.sh
    ```
-3. **Vérifier** : l’API devrait répondre sur le port `API_PORT` défini dans votre `.env`.  
-4. Le frontend peut également être containerisé (Dockerfile dans `frontend`), selon votre workflow habituel. Un exemple de `docker-compose` unifié pourrait être ajouté si besoin.
+3. **Verify**: the API should respond on the `API_PORT` defined in your `.env`.  
+4. The frontend can also be containerized (Dockerfile in `frontend`), according to your usual workflow. A unified `docker-compose` example could be added if needed.
 
 ---
 
-## 6. Scripts utiles
+## 6. Useful scripts
 
-- **Backend** :  
-  - `npm run dev` : démarre le serveur Fastify en mode développement (watch).  
-  - `npm run prisma:generate` : génère le client Prisma.  
-  - `npm run prisma:migrate` : applique les migrations en mode dev.  
-  - `npm run prisma:seed` : lance le script de seed.  
-  - `npm run lint:check` / `lint:fix` : vérifie / corrige le code via ESLint.  
-  - `npm run format:check` / `format:fix` : vérifie / formate via Prettier.  
+- **Backend**:  
+  - `npm run dev`: starts the Fastify server in development mode (watch).  
+  - `npm run prisma:generate`: generates the Prisma client.  
+  - `npm run prisma:migrate`: applies migrations in dev mode.  
+  - `npm run prisma:seed`: runs the seed script.  
+  - `npm run lint:check` / `lint:fix`: checks / fixes code via ESLint.  
+  - `npm run format:check` / `format:fix`: checks / formats via Prettier.  
 
-- **Frontend** :  
-  - `npm run dev` : lance Vite en mode dev.  
-  - `npm run build` : construit l’application pour la production.  
-  - `npm run preview` : prévisualise le build.  
+- **Frontend**:  
+  - `npm run dev`: launches Vite in dev mode.  
+  - `npm run build`: builds the application for production.  
+  - `npm run preview`: previews the build.  
 
-- **Scripts Docker (backend/usefull-scripts)** :  
-  - `start-docker.sh` : lance Docker Compose (API + Postgres).  
-  - `stop_docker.sh` : stoppe et supprime les conteneurs.  
-  - `init-docker.sh` : génère le client Prisma, exécute migrations et seed.  
-  - `generate-local.sh`, `migrate-local.sh` : utilitaires pour générer le client Prisma et lancer des migrations en local.
+- **Docker Scripts (backend/usefull-scripts)**:  
+  - `start-docker.sh`: launches Docker Compose (API + Postgres).  
+  - `stop_docker.sh`: stops and removes containers.  
+  - `init-docker.sh`: generates the Prisma client, runs migrations and seed.  
+  - `generate-local.sh`, `migrate-local.sh`: utilities to generate the Prisma client and run migrations locally.
 
 ---
 
